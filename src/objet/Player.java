@@ -22,9 +22,14 @@ public class Player extends GameObject{
 	private Rectangle objectBox;
 	private Image img;
 	
+	private float xinit;
+	private float yinit;
+	
 	
 	public Player(float x, float y, int width, int height, int id){
 		super(x, y, width, height, id);
+		xinit = x;
+		yinit = y;
 		init();
 	}
 
@@ -62,23 +67,20 @@ public class Player extends GameObject{
 				objectBox = ((Tuyau) objects.elementAt(i)).getBounds();
 				if(getBounds().intersects(objectBox)){
 					over = true;
-					System.out.println("touché");
-					/*
 					for(int j = 0; j<objects.size(); j++){
-						if(objects.get(j).getId() == GameObjectId.Text){
-							((Text) objects.get(j)).fin = true;
+						if(((GameObject) objects.elementAt(j)).getId() == 3){
+							((Text) objects.elementAt(j)).setfin(true);
 						}
-					}*/
+					}
 				}
 				objectBox = ((Tuyau) objects.elementAt(i)).getBounds2();
 				if(getBounds().intersects(objectBox)){
 					over = true;
-					System.out.println("touché");
-					/*for(int j = 0; j<objects.size(); j++){
-						if(objects.get(j).getId() == GameObjectId.Text){
-							((Text) objects.get(j)).setfin(true);
+					for(int j = 0; j<objects.size(); j++){
+						if(((GameObject) objects.elementAt(j)).getId() == 3){
+							((Text) objects.elementAt(j)).setfin(true);
 						}
-					}*/
+					}
 				}
 			}
 		}
@@ -109,33 +111,19 @@ public class Player extends GameObject{
 			img = Image.createImage("/piafcarre2.png");
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.err.println("CKC");
 		}
-		//img = createThumbnail(img);
 		}
 	
-	private Image createThumbnail(Image image) {
-		int sourceWidth = image.getWidth();
-		int sourceHeight = image.getHeight();
-		int thumbWidth = 25;
-		int thumbHeight = 20;
 
 
-		Image thumb = Image.createImage(thumbWidth, thumbHeight);
-		Graphics g = thumb.getGraphics();
-
-		for (int y = 0; y < thumbHeight; y++) {
-			for (int x = 0; x < thumbWidth; x++) {
-				g.setClip(x, y, 1, 1);
-				int dx = x * sourceWidth / thumbWidth;
-				int dy = y * sourceHeight / thumbHeight;
-				g.drawImage(image, x - dx, y - dy, Graphics.LEFT | Graphics.TOP);
-			}
-		}
-
-		Image immutableThumb = Image.createImage(thumb);
-
-		return immutableThumb;
+	public void reset() {
+		x = xinit;
+		y = yinit;
+		over = false;
+		falling = true;
+		jumping = false;
+		gravity = 0.13f;
+		velY = 0;
 	}
 	
 

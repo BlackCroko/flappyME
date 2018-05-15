@@ -12,10 +12,14 @@ public class Paysage extends GameObject{
 	
 	private Image img;
 	private float x2;
+	private int xinit;
+	private int x2init;
 
 
 	public Paysage(float x, float y, int width, int height, int id) {
 		super(0, y, 480*2, 291, id);
+		xinit = 0;
+		x2init = 480*2;
 		velX = 0.3f;
 		x2 = 480*2;
 		init();
@@ -78,6 +82,14 @@ public class Paysage extends GameObject{
 		Image immutableThumb = Image.createImage(thumb);
 
 		return immutableThumb;
+	}
+
+
+	public void reset() {
+		x= xinit;
+		x2 = x2init;
+		velX = 0.3f;
+		x2 = 480*2;
 	}
 	
 	}

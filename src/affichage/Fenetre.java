@@ -5,10 +5,9 @@ import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 
-import com.sun.midp.lcdui.Text;
-
 import objet.Paysage;
 import objet.Player;
+import objet.Text;
 import objet.Tuyau;
 
 public class Fenetre extends Canvas implements Runnable {
@@ -37,6 +36,7 @@ public class Fenetre extends Canvas implements Runnable {
 		handler.addObject(new Player(30, 60, 25, 20, 1));
 		handler.addObject(new Tuyau(140, 50, 30, 290, 2));
 		handler.addObject(new Tuyau(280, 50, 30, 290, 2));
+		handler.addObject(new Text((width/2)-30, 20, 300, 200, 3));
 
 	}
 
@@ -73,11 +73,6 @@ public class Fenetre extends Canvas implements Runnable {
 	
 
 	protected void keyPressed(int keyCode) {
-		if(keyCode == -6)
-			System.out.println("touché coulé");
-		if(keyCode == -7)
-			System.out.println("coulé direct");
-		System.out.println(keyCode);
 		if (!handler.IsUpdate()) {
 			handler.setUpdate(true);
 		} else {
@@ -108,8 +103,6 @@ public class Fenetre extends Canvas implements Runnable {
 
 	public void update() {
 		handler.update();
-		if (handler.IsReset())
-			init();
 	}
 
 	public Handler getHandler() {

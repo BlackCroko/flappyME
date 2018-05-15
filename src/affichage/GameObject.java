@@ -76,5 +76,6 @@ public abstract class GameObject {
 	public void setvelY(float velY) {
 		this.velY = velY;
 	}
+	public abstract void reset();
 
 }

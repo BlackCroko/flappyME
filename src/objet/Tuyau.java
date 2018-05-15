@@ -7,8 +7,6 @@ import java.util.Vector;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Image;
 
-import com.sun.midp.lcdui.Text;
-
 import affichage.GameObject;
 
 public class Tuyau extends GameObject{
@@ -19,26 +17,28 @@ public class Tuyau extends GameObject{
 	private Image img2;
 	private int y2 = -400;
 	private boolean point = false;
+	private float xinit;
 	
 
 	public Tuyau(float x, float y, int width, int height, int id) {
 		super(x, y, width, height, id);
+		xinit = x;
 		velX = 1.36f;
 		init();
-		reset();
+		reset2();
 	}
 
 
 	public void update(Vector objects) {
 		if(x <= -30){
 			x = 240;
-			reset();
+			reset2();
 			point = false;
 		}
 		x -= velX;
 		//getBounds();
-		//if(!point)
-		//point(objects);
+		if(!point)
+		point(objects);
 	}
 
 
@@ -46,9 +46,6 @@ public class Tuyau extends GameObject{
 
 			g.drawImage(img, (int) x, (int) y, g.BOTTOM|g.LEFT);
 			g.drawImage(img2, (int) x, (int) y+60, g.TOP|g.LEFT);
-//			g.setColor(0x444444);
-//			g.drawRect((int) x, (int) y-this.height, this.width, this.height);
-//			g.drawRect((int) x, (int) y + 60, this.width, this.height);
 			
 	}
 
@@ -73,27 +70,29 @@ public class Tuyau extends GameObject{
 		}
 	
 	
-	/*public void point(Vector objects){
+	public void point(Vector objects){
 		if(x <= 35){
 			for(int i = 0; i<objects.size(); i++){
-				if(objects.get(i).getId() == GameObjectId.Text){
-				((Text) objects.get(i)).win();
-				if(((Text) objects.get(i)).getScore()%10 == 0){
-					
-					for(int j = 0; j<objects.size(); j++)
-						if(objects.get(j).getId() == GameObjectId.Tuyau)
-							objects.get(j).setvelX((objects.get(j).getvelX())+0.01f);
-				}
+				if(((GameObject) objects.elementAt(i)).getId() == 3){
+				((Text) objects.elementAt(i)).win();
 				point = true;
 				}
 			}
 		}
-	}*/
+	}
 	
-	public void reset(){
+	public void reset2(){
 		Random r = new Random();
 		int nb = (int) (r.nextFloat()*180+40);
 		y = nb;
+		point = false;
+	}
+
+
+	public void reset() {
+		x = xinit;
+		reset2();
+		
 	}
 	
 	
